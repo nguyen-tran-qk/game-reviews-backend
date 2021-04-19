@@ -3,7 +3,7 @@ import passport from 'passport';
 import passportLocal from 'passport-local';
 import bcrypt from 'bcrypt';
 import passportJWT from 'passport-jwt';
-import {userModel} from '../model.js';
+import userModel from '../models/userModel.js';
 
 const Strategy = passportLocal.Strategy;
 const JWTStrategy = passportJWT.Strategy;
