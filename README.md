@@ -1,0 +1,1 @@
+Backend for Game Reviews Forum project of SSSF21 course at Metropolia UAS
