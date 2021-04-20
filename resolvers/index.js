@@ -1,3 +1,7 @@
 'use strict';
 
-export default [];
+import userResolver from "./userResolver.js";
+
+export default [
+    userResolver
+];
