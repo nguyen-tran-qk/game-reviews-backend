@@ -29,7 +29,7 @@ export default {
                 const { username, password } = args;
 
                 const hashedPassword = await bcrypt.hash(password, 12);
-                const newUser = new userModel({ username, password: hashedPassword });
+                const newUser = new userModel({ username, password: hashedPassword, role: 'MEMBER' });
 
                 return newUser.save();
             } catch (error) {
@@ -38,5 +38,24 @@ export default {
                 );
             }
         },
+        registerAdmin: async (_, args) => {
+            try {
+                const hasAdmin = await userModel.findOne({ role: 'ADMIN' }).exec();
+                if (hasAdmin) {
+                    console.log(hasAdmin);
+                    throw new Error('Admin user already exists.');
+                }
+
+                const { username, password } = args;
+                const hashedPassword = await bcrypt.hash(password, 12);
+                const newUser = new userModel({ username, password: hashedPassword, role: 'ADMIN' });
+
+                return newUser.save();
+            } catch (error) {
+                throw new UserInputError(
+                    `Error while creating an admin user: ${error.message}`
+                );
+            }
+        }
     },
 };
