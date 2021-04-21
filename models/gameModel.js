@@ -5,10 +5,10 @@ const gameSchema = new mongoose.Schema({
     title: String,
     description: String,
     images: [ String ],
-    genre: {
+    genres: [{
         type: String,
         enum: [ 'shooter', 'fighting', 'survival', 'battle royale', 'adventure', 'rpg', 'mmorpg', 'simulation', 'strategy', 'sports' ]
-    },
+    }],
     price: Number,
     studio: String,
     publishedDate: String
