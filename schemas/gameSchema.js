@@ -28,8 +28,9 @@ export default gql`
     }
 
     extend type Query {
-        games: [Game]
-        game(id: ID!): Game
+        getAllGames: [Game]
+        getGameById(id: ID!): Game
+        findGameByTitle(title: String!): Game
     }
 
     extend type Mutation {

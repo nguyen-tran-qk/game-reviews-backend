@@ -5,7 +5,7 @@ import { AuthenticationError, UserInputError } from 'apollo-server-errors';
 
 export default {
     Query: {
-        games: () => {
+        getAllGames: () => {
             try {
                 return gameModel.find({});
             } catch (error) {
@@ -14,9 +14,10 @@ export default {
                 );
             }
         },
-        game: async (parent, args) => {
+        getGameById: (parent, args) => {
             return gameModel.findById(args.id);
-        }
+        },
+        findGameByTitle: (parent, args) => gameModel.find({ title: args.title })
     },
     Mutation: {
         addGame: async (parent, args, context) => {
