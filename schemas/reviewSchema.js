@@ -5,7 +5,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
     type Review {
         id: ID
-        userId: ID!
+        username: String!
         gameId: ID!
         reviewText: String!
         rating: Float!
@@ -19,7 +19,6 @@ export default gql`
 
     extend type Mutation {
         addReviewToGame(
-            userId: ID!,
             gameId: ID!,
             reviewText: String!,
             rating: Float!,

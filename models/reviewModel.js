@@ -2,10 +2,7 @@
 import mongoose from 'mongoose';
 
 const reviewSchema = new mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    username: String,
     gameId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Game'
