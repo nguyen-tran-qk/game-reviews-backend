@@ -17,6 +17,7 @@ export default {
                     id: authResponse.user._id,
                     username: authResponse.user.username,
                     token: authResponse.token,
+                    role: authResponse.user.role
                 };
             } catch (error) {
                 throw new AuthenticationError(error.message || error);
