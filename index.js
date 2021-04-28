@@ -42,13 +42,14 @@ dotenv.config();
         app.use(express.json());
         app.use(express.urlencoded({ extended: true }));
 
+        server.applyMiddleware({ app, path: '/' });
+        
         process.env.NODE_ENV = process.env.NODE_ENV || 'development';
         if (process.env.NODE_ENV === 'production') {
             console.log('prduction');
             const { default: production } = await import('./sec/production.js');
             production(app, 3000);
         } else {
-            server.applyMiddleware({ app, path: '/' });
             console.log('localhost');
             const { default: localhost } = await import('./sec/localhost.js');
             localhost(app, 8000, 3000);
