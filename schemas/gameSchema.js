@@ -6,8 +6,8 @@ export default gql`
     type Game {
         id: ID!
         title: String!
-        description: String!
-        images: [String]!
+        description: String
+        images: [String]
         genres: [Genre]
         price: Float
         studio: String
@@ -36,7 +36,7 @@ export default gql`
     extend type Mutation {
         addGame(
             title: String!
-            description: String!
+            description: String
             images: [String] = []
             genres: [Genre]
             price: Float
