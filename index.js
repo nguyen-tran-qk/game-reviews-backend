@@ -32,6 +32,7 @@ dotenv.config();
                     };
                 }
             },
+            playground: true
         });
 
         const app = express();
@@ -43,7 +44,7 @@ dotenv.config();
         app.use(express.urlencoded({ extended: true }));
 
         server.applyMiddleware({ app, path: '/' });
-        
+
         process.env.NODE_ENV = process.env.NODE_ENV || 'development';
         if (process.env.NODE_ENV === 'production') {
             console.log('prduction');
@@ -52,7 +53,7 @@ dotenv.config();
         } else {
             console.log('localhost');
             const { default: localhost } = await import('./sec/localhost.js');
-            localhost(app, 8000, 3000);
+            localhost(app, 8000, 3001);
         }
     } catch (e) {
         console.log("server error: " + e.message);

@@ -6,7 +6,7 @@ export default gql`
     type Review {
         id: ID
         username: String!
-        gameId: ID!
+        gameId: Game
         reviewText: String!
         rating: Float!
         images: [String]
@@ -14,6 +14,7 @@ export default gql`
     }
 
     extend type Query {
+        getAllReviews: [Review]
         getReviewsByGame(gameId: ID!): [Review]
     }
 
@@ -24,6 +25,12 @@ export default gql`
             rating: Float!,
             images: [String]
         ): Review
+        addReviewToNewGame(
+            gameTitle: String!,
+            reviewText: String!,
+            rating: Float!,
+            images: [String]
+        ): Review,
         updateReview(
             id: ID!,
             reviewText: String!,

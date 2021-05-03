@@ -1,10 +1,20 @@
 'use strict';
 
 import { AuthenticationError, UserInputError } from 'apollo-server-errors';
+import gameModel from '../models/gameModel.js';
 import reviewModel from '../models/reviewModel.js';
 
 export default {
     Query: {
+        getAllReviews: () => {
+            try {
+                return reviewModel.find({});
+            } catch (error) {
+                throw new UserInputError(
+                    `Failed to retrieve all game reviews: ${error.message}`
+                );
+            }
+        },
         getReviewsByGame: (parent, args) => {
             try {
                 return reviewModel.find({ gameId: args.gameId });
@@ -22,6 +32,22 @@ export default {
                 if (!user) throw new AuthenticationError("Not authenticated!");
 
                 const newReview = new reviewModel({ ...args, username: user.username });
+                return newReview.save();
+            } catch (error) {
+                throw new UserInputError(
+                    `Failed to add game review: ${error.message}`
+                );
+            }
+        },
+        addReviewToNewGame: async (parent, args, context) => {
+            try {
+                const { user } = context;
+                if (!user) throw new AuthenticationError("Not authenticated!");
+
+                const { gameTitle, ...otherArgs } = args;
+                const newGame = new gameModel({ title: args.gameTitle });
+                await newGame.save();
+                const newReview = new reviewModel({ ...otherArgs, username: user.username, gameId: newGame.id });
                 return newReview.save();
             } catch (error) {
                 throw new UserInputError(

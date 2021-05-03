@@ -4,6 +4,9 @@ import gameModel from '../models/gameModel.js';
 import { AuthenticationError, UserInputError } from 'apollo-server-errors';
 
 export default {
+    Review: {
+        gameId: (parent) => gameModel.findById(parent.gameId)
+    },
     Query: {
         getAllGames: () => {
             try {
@@ -17,7 +20,7 @@ export default {
         getGameById: (parent, args) => {
             return gameModel.findById(args.id);
         },
-        findGameByTitle: (parent, args) => gameModel.find({ title: args.title })
+        findGameByTitle: (parent, args) => gameModel.find({ title: { $regex: args.title, $options: 'i' } })
     },
     Mutation: {
         addGame: async (parent, args, context) => {
