@@ -5,7 +5,7 @@ import commentModel from '../models/commentModel.js';
 
 export default {
     Mutation: {
-        addCommentToReview: async (parent, args, context) => {
+        addComment: async (parent, args, context) => {
             try {
                 const { user } = context;
                 if (!user) throw new AuthenticationError("Not authenticated!");
