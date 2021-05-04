@@ -10,6 +10,10 @@ const reviewSchema = new mongoose.Schema({
     reviewText: String,
     rating: Number,
     images: [ String ],
+    comments: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment'
+    }]
 }, { timestamps: true });
 
 const reviewModel = mongoose.model('Review', reviewSchema);

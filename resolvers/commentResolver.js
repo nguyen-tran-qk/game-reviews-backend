@@ -4,17 +4,6 @@ import { AuthenticationError, UserInputError } from 'apollo-server-errors';
 import commentModel from '../models/commentModel.js';
 
 export default {
-    Query: {
-        getReviewComments: (parent, args) => {
-            try {
-                return commentModel.find({ reviewId: args.reviewId });
-            } catch (error) {
-                throw new UserInputError(
-                    `Failed to retrieve review comments: ${error.message}`
-                );
-            }
-        },
-    },
     Mutation: {
         addCommentToReview: async (parent, args, context) => {
             try {
@@ -25,7 +14,7 @@ export default {
                 return newComment.save();
             } catch (error) {
                 throw new UserInputError(
-                    `Failed to add review comment: ${error.message}`
+                    `Failed to add comment: ${error.message}`
                 );
             }
         },

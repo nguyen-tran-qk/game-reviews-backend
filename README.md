@@ -42,7 +42,8 @@ This repo is the backend of the project. The frontend repo can be found at: http
             },
             reviewText,
             rating,
-            createdAt
+            createdAt,
+            comments
         }
     }
 ```
@@ -198,21 +199,10 @@ In this case, a new game will be created based on the title, along with the new 
     }
 ```
 
-## Get review comments
-```
-    query {
-        getReviewComments(reviewId: "60906b50757cc51654caa4ae") {
-            id,
-            username,
-            commentText
-        }
-    }
-```
-
 ## Comment on a review
 ```
     mutation {
-        addCommentToReview(reviewId: "60906b50757cc51654caa4ae", commentText: "I agree") {
+        addComment(commentText: "I agree") {
             id,
             username,
             commentText,

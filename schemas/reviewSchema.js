@@ -11,6 +11,7 @@ export default gql`
         rating: Float!
         images: [String]
         createdAt: String
+        comments: [Comment]
     }
 
     extend type Query {
