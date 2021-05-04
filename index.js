@@ -18,6 +18,7 @@ dotenv.config();
             console.log("Connected successfully.");
         }
 
+        process.env.NODE_ENV = process.env.NODE_ENV || 'development';
         const server = new ApolloServer({
             typeDefs: schemas,
             resolvers,
@@ -32,7 +33,7 @@ dotenv.config();
                     };
                 }
             },
-            playground: true
+            playground: process.env.NODE_ENV === 'development'
         });
 
         const app = express();
@@ -45,7 +46,6 @@ dotenv.config();
 
         server.applyMiddleware({ app, path: '/' });
 
-        process.env.NODE_ENV = process.env.NODE_ENV || 'development';
         if (process.env.NODE_ENV === 'production') {
             console.log('prduction');
             const { default: production } = await import('./sec/production.js');
