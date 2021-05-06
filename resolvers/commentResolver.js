@@ -2,16 +2,24 @@
 
 import { AuthenticationError, UserInputError } from 'apollo-server-errors';
 import commentModel from '../models/commentModel.js';
+import reviewModel from '../models/reviewModel.js';
 
 export default {
     Mutation: {
-        addComment: async (parent, args, context) => {
+        addCommentToReview: async (parent, args, context) => {
             try {
                 const { user } = context;
                 if (!user) throw new AuthenticationError("Not authenticated!");
 
-                const newComment = new commentModel({ ...args, username: user.username });
-                return newComment.save();
+                const { reviewId, ...otherArgs } = args;
+
+                let newComment = new commentModel({ ...otherArgs, username: user.username });
+                newComment = await newComment.save();
+
+                const review = await reviewModel.findById(reviewId);
+                review.comments = review.comments.concat(newComment.id);
+                await review.save();
+                return newComment;
             } catch (error) {
                 throw new UserInputError(
                     `Failed to add comment: ${error.message}`

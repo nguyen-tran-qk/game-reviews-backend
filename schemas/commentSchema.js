@@ -11,7 +11,7 @@ export default gql`
     }
 
     extend type Mutation {
-        addComment(commentText: String!): Comment
+        addCommentToReview(reviewId: ID!, commentText: String!): Comment
         editComment(id: ID!, commentText: String!): Comment
         deleteComment(id: ID!): ID
     }
