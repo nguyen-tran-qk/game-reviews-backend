@@ -202,7 +202,7 @@ In this case, a new game will be created based on the title, along with the new 
 ## Comment on a review
 ```
     mutation {
-        addComment(commentText: "I agree") {
+        addCommentToReview(reviewId: "6090746c41a72e07e425e2e9", commentText: "I agree") {
             id,
             username,
             commentText,
