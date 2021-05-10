@@ -9,6 +9,9 @@ This repo is the backend of the project. The frontend repo can be found at: http
 
 ### Backend server to test in Postman: https://nguyentran-chargemap.jelastic.metropolia.fi/
 
+### What has changed since the presentation?
+Most of the changes are on the frontend. Checkout the frontend repo at: https://github.com/nguyen-tran-qk/game-reviews-forum. The only change on backend is the fix to add comment to review.
+
 ---
 
 ## Register an account
